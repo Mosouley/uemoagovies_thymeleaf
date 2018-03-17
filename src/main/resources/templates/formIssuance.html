@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{fragments/layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Saisie des emissions! | </title>
+</head>
+	<div class="right_col" role="main" data-layout-fragment="content">
+
+
+
+		<div class="col-md-6 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>Formulaire de saisie des emissions<small>uemoa govies</small></h2>
+					<ul class="nav navbar-right panel_toolbox">
+						<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Settings 1</a>
+								</li>
+								<li><a href="#">Settings 2</a>
+								</li>
+							</ul>
+						</li>
+						<li><a class="close-link"><i class="fa fa-close"></i></a>
+						</li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<br />
+				<form class="form-horizontal form-label-left" th:action="@{SaveGovies}" method="post" th:object="${issuance} " enctype="multipart/form-data">
+					<div class="form-group">
+
+						<label class="control-label col-md-3 col-sm-3 col-xs-12 "> Code Isin:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"	th:field="*{codeIsin}" class="form-control" placeholder="Code Isin"/>
+						</div>
+						<span class="text-danger" th:errors="*{codeIsin}"></span>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12 "> Issue Reference:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text" th:field="*{issueReference}" class="form-control" /> 
+						<span class="text-danger" th:errors="*{issueReference}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12 "> Description:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text" th:field="*{issueDescription}" class="form-control" /> 
+						<span class="text-danger" th:errors="*{issueDescription}"></span>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Tranche:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"	th:field="*{issueTranche}" class="form-control" /> 
+						<span class="text-danger" th:errors="*{issueTranche}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Issue Date:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="date" th:field="*{issueDate}" class="form-control" /> 
+						<span class="text-danger" th:errors="*{issueDate}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12">Issuer:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<select class="select2_single form-control" tabindex="-1" >
+								<option th:each="e:${issuerLits}" th:value="${e.fullName}" th:text="${e.fullName}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group" >
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Type:</label>
+						<div class="col-md-2 col-sm-1 col-xs-12">
+							<select class="select2_single form-control" tabindex="-1"  th:field="*{goviesType}">
+								<option th:each="e:${typeList}"
+										th:value="${e.getId}"
+										th:text="${e.getShortName}">
+
+								</option>
+							</select>
+						<input type="text" th:field="*{goviesType}" class="form-control" />
+						 <span class="text-danger" th:errors="*{goviesType}"></span>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Repayment Mode:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<select class="select2_single form-control" tabindex="-1"  th:field="*{repayMode}">
+								<option th:each="e:${T(com.moh.uemoagovies.helpers.GoviesRepayMode).values()}"
+										th:value="${e}"
+										th:text="${e.repayMode}">
+
+								</option>
+							</select>
+						<!--<input type="text"	th:field="*{repayMode}" class="form-control" /> -->
+							<!--<span class="text-danger" th:errors="*{repayMode}"></span>-->
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Repayment Period:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<select class="select2_single form-control" tabindex="-1"  th:field="*{repayPeriod}">
+								<option th:each="e:${T(com.moh.uemoagovies.helpers.FrequenceCalcul.values()}"
+										th:value="${e}"
+										th:text="${e.frequence}">
+								</option>
+							</select>
+						</div>
+					</div>
+	
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Interest Periodicity:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<select class="select2_single form-control" tabindex="-1"  th:field="*{interestPeriod}">
+								<option th:each="e:${T(com.moh.uemoagovies.helpers.FrequenceCalcul.values()}"
+										th:value="${e}"
+										th:text="${e.frequence}">
+								</option>
+							</select>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Grace Period:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{gracePeriod}" class="form-control" />
+						<span class="text-danger" th:errors="*{gracePeriod}"></span>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Nominal Value:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"	th:field="*{nominalValue}"  class="form-control" />
+						<span class="text-danger" th:errors="*{nominalValue}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Value Date:</label>
+						<div class="col-md-3 col-sm-3 col-xs-12">
+						<input type="date"
+							th:field="*{valueDate}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{valueDate}"></span>
+						</div>
+					<!--</div>-->
+					<!--<div class="form-group">-->
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Maturity Date:</label>
+						<div class="col-md-3 col-sm-3 col-xs-12">
+						<input type="date"
+							th:field="*{maturityDate}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{maturityDate}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Coupon Rate:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{couponRate}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{couponRate}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Offered Amount:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{offeredAmount}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{offeredAmount}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Offered Primary Dealers:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{offeredONC}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{offeredONC}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Bid Amount:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{bidAmount}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{bidAmount}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Get Amount:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{getAmount}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{getAmount}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Marginal Rate:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="text"
+							th:field="*{marginalRate}" class="form-control" /> 
+							<span class="text-danger" th:errors="*{marginalRate}"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="control-label col-md-3 col-sm-3 col-xs-12 "> Compte Rendu:</label>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+						<input type="file"
+							name="minutes" class="form-control" /> 
+							<span class="text-danger" th:errors="*{minutesIssuance}"></span>
+						</div>
+					</div>
+
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+							<button type="button" class="btn btn-primary">Cancel</button>
+							<button type="reset" class="btn btn-primary">Reset</button>
+							<button type="submit" class="btn btn-success">Save</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+</body>
+</html>

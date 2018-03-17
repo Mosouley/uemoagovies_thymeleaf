@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>UEMOA Emissions de titres du marche</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8"/>
+<title>UEMOA Emissions de titres du marche</title>
+</head>
+<body>
+<div class="container spacer">
+		<a th:href="@{form}">Saisir une emission</a>
+	</div>
+
+	<div class="container wrapper ">
+		<form th:action="@{list}" method="get">
+			<div class="form-group">
+				<label>Code Isin:</label> 
+				<input type="text" name="motCle"  />
+				<button type="submit">Chercher</button>
+			</div>
+		</form>
+	</div>
+		<div class="container spacer">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Code Isin</th>
+						<th>Issue Reference</th>
+						<th>Issue Description</th>
+						<th>Issue Tranche</th>
+						<th>Issue Date</th>
+						<th>Issuer</th>
+						<th>Govies Type</th>
+						<th>Repayment Mode</th>
+						<th>Repayment Periodicity</th>
+						<th>Interest Periodicity</th>
+						<th>Grace Period</th>
+						<th>Nominal Value</th>
+						<th>Value Date</th>
+						<th>Maturity Date</th>
+						<th>Coupon Rate</th>
+						<th>Offered Amount</th>
+						<th>Offered ONC</th>
+						<th>Bid Amount</th>
+						<th>Get Amount</th>
+						<th>Average Rate</th>
+						<th>Marginal Rate</th>
+						<th>Minutes of Issuance</th>
+					</tr>
+				</thead>
+	
+				<tbody>
+					<tr th:each="e:${issueList}">
+						<td th:text="${e.codeIsin}"></td>
+						<td th:text="${e.issueReference}"></td>
+						<td th:text="${e.issueDescription}"></td>
+						<td th:text="${e.issueTranche}"></td>
+						<td th:text="${e.issueDate}"></td>
+						<td th:text="${e.issuer}"></td>
+						<td th:text="${e.goviesType}"></td>
+						<td th:text="${e.repayMode}"></td>
+						<td th:text="${e.repayPeriod}"></td>
+						<td th:text="${e.interestPeriod}"></td>
+						<td th:text="${e.gracePeriod}"></td>
+						<td th:text="${e.nominalValue}"></td>
+						<td th:text="${e.valueDate}"></td>
+						<td th:text="${e.maturityDate}"></td>
+						<td th:text="${e.couponRate}"></td>
+						<td th:text="${e.offeredAmount}"></td>
+						<td th:text="${e.offeredONC}"></td>
+						<td th:text="${e.bidAmount}"></td>
+						<td th:text="${e.getAmount}"></td>
+						<td th:text="${e.marginalRate}"></td>
+						<td th:file="${e.minutesIssuance}"></td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+	<div class="container ">
+		<ul class="nav nav-pills ">
+<!-- 			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''"> -->
+<!-- 				<a th:text="${p} " th:href="@{Index(page=${p},motcle=${motCle})}"></a> -->
+<!-- 			</li> -->
+		</ul>
+	</div>
+</body>
+</html>
