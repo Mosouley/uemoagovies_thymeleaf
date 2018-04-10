@@ -39,18 +39,21 @@ public class SecuritySecConfiguration extends WebSecurityConfigurerAdapter {
 		http.
 			authorizeRequests()
 				.antMatchers("/").permitAll()
+
 				.antMatchers("/govies/").permitAll()
 				.antMatchers("/govies/login").permitAll()
 				.antMatchers("/govies/registration").permitAll()
+				.antMatchers("issuers/**").hasAuthority("ADMIN")
 				.antMatchers("/govies/**").hasAuthority("ADMIN").anyRequest()
 				.authenticated().and().csrf().disable().formLogin()
 				.loginPage("/govies/login").failureUrl("/govies/login?error=true")
-				.defaultSuccessUrl("/govies/list")
+				.defaultSuccessUrl("/govies/listIssue")
 				.usernameParameter("email")
 				.passwordParameter("password")
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
+
 				.accessDeniedPage("/access-denied");
 	}
 	

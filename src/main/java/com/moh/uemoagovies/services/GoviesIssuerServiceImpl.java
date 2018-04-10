@@ -12,16 +12,6 @@ public class GoviesIssuerServiceImpl implements GoviesIssuerService {
 
 	@Autowired
 	GoviesIssuerRepository goviesIssuerRepository;
-	
-	@Override
-	public Iterable<GoviesIssuer> listAllGoviesIssuers() {
-		return goviesIssuerRepository.findAll();
-	}
-
-	@Override
-	public GoviesIssuer getGoviesIssuerById(Long id) {
-		return goviesIssuerRepository.findOne(id);
-	}
 
 	@Override
 	public GoviesIssuer getIssuerByShortName(String shortName) {
@@ -29,8 +19,28 @@ public class GoviesIssuerServiceImpl implements GoviesIssuerService {
 	}
 
 	@Override
-	public GoviesIssuer getIssuerByFullName(String fullName) {
+	public  GoviesIssuer getIssuerByFullName(String fullName) {
 		return goviesIssuerRepository.findByFullName(fullName);
 	}
 
+	@Override
+	public Iterable<GoviesIssuer> listAll() {
+		return goviesIssuerRepository.findAll();
+	}
+
+	@Override
+	public GoviesIssuer getById(Long id) {
+		return goviesIssuerRepository.findOne(id);
+	}
+
+	@Override
+	public GoviesIssuer saveOrUpdate(GoviesIssuer domainObject) {
+
+		return goviesIssuerRepository.save(domainObject);
+	}
+
+	@Override
+	public void delete(Long id) {
+		goviesIssuerRepository.delete(id);
+	}
 }

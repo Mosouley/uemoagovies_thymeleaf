@@ -8,7 +8,8 @@ public enum ConventionBase {
         REEL_365("Réel/365"),
         TRENTE_REEL("30/Réel"),
         REEL_REEL("Réel/Réel"),
-        REEL_364("Réel/364");
+        REEL_364("Réel/364"),
+        REEL_360("Réel/360");
 
     private String baseCalcul;
 
@@ -16,14 +17,10 @@ public enum ConventionBase {
         this.baseCalcul = baseCalcul;
     }
 
-    public String BaseCalculs() {
+    public String getBaseCalcul() {
         return baseCalcul;
     }
 
-    @Override
-    public String toString() {
-        return baseCalcul;
-    }
 
 }
 

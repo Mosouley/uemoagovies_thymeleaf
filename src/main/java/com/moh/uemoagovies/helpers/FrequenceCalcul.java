@@ -10,7 +10,7 @@ public enum FrequenceCalcul {
     PRECOMPTE("PreCompte"),
     INFINE("In fine");
  
-    private String frequence;
+    private final String frequence;
 
     FrequenceCalcul(String frequence) {
         this.frequence = frequence;
@@ -20,9 +20,5 @@ public enum FrequenceCalcul {
         return frequence;
     }
 
-    @Override
-    public String toString() {
-        return frequence;
-    }
 
 }

@@ -2,6 +2,8 @@
 package com.moh.uemoagovies.domain;
 
 
+import com.moh.uemoagovies.helpers.ConventionBase;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,7 @@ public class GoviesType extends AbstractDomainClass {
 
 	@Column(nullable = false)
     @Basic
-    private int conventionBase;
+    private ConventionBase conventionBase;
 
     @Column(unique = true, length = 50)
     @Basic
@@ -26,15 +28,11 @@ public class GoviesType extends AbstractDomainClass {
     @Basic
     private String shortName;
 
-    @Column(length = 50)
-    @Basic
-    private String nomConvention;
-
-	public int getConventionBase() {
+	public ConventionBase getConventionBase() {
 		return conventionBase;
 	}
 
-	public void setConventionBase(int conventionBase) {
+	public void setConventionBase(ConventionBase conventionBase) {
 		this.conventionBase = conventionBase;
 	}
 
@@ -53,15 +51,6 @@ public class GoviesType extends AbstractDomainClass {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-
-	public String getNomConvention() {
-		return nomConvention;
-	}
-
-	public void setNomConvention(String nomConvention) {
-		this.nomConvention = nomConvention;
-	}
-
 
    
 }

@@ -51,16 +51,16 @@ public class GoviesIssueController {
 
 	
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
-	public String login(){
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("login");
-//		return modelAndView;
-		return "login";
+	public ModelAndView login(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("login");
+		return modelAndView;
+//		return "login";
 	}
     @RequestMapping(value={"/login"}, method = RequestMethod.POST)
   	public String connect(){
   		
-  		return "redirect:listIssuance";
+  		return "redirect:listIssue";
   	}
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
@@ -94,7 +94,7 @@ public class GoviesIssueController {
 	}
 
 
-	@RequestMapping(value= "/listIssuance", method = RequestMethod.GET)
+	@RequestMapping(value= "/listIssue", method = RequestMethod.GET)
 	//@ApiOperation(value = "Get the list of all the govies issued in the market", notes = "Get the list of all the govies issued in the market")
 	public String getAllGoviesIssue(Model model) {
 		Iterable<GoviesIssue> listeGov=goviesIssueService.getGoviesIssueList();
@@ -107,7 +107,7 @@ public class GoviesIssueController {
 	//@ApiOperation(value = "Get the list of all the govies issued in the market", notes = "Get the list of all the govies issued in the market")
 	public String getAllGoviestype(Model model) {
 		Iterable<GoviesType> listeType=goviesTypeRepository.findAll();
-		model.addAttribute("issueList",listeType );
+		model.addAttribute("typeList",listeType );
 
 		return "goviesType";
 	}
@@ -115,6 +115,9 @@ public class GoviesIssueController {
 	public String formGovies(Model model) {
 
 		model.addAttribute("issuance", new GoviesIssue());
+		model.addAttribute("issuersList",goviesIssuerService.listAll() );
+
+		model.addAttribute("typeList",goviesTypeRepository.findAll() );
 		return "formIssuance";
 	}
 	
@@ -127,8 +130,7 @@ public class GoviesIssueController {
 		if (bindingResult.hasErrors()) {
 			return "formIssuance";
 		}
-		model.addAttribute("issuersList",goviesIssuerService.listAllGoviesIssuers() );
-		model.addAttribute("typeList",goviesTypeRepository.findAll() );
+
 		if(!file.isEmpty()) {issue.setMinutesIssuance(file.getOriginalFilename());}
 		goviesIssueService.saveOrUpdate(issue);
 		if(!file.isEmpty()) {
@@ -137,13 +139,14 @@ public class GoviesIssueController {
 			file.transferTo(new File(imageDir+issue.getId()));
 		}
 		
-		return "redirect:listIssuance";
+		return "redirect:listIssue";
 	}
 
 	@RequestMapping(value="/formGoviesType",method=RequestMethod.GET)
 	public String formGoviesType(Model model) {
 
 		model.addAttribute("goviesType", new GoviesType());
+		model.addAttribute("typeList",goviesTypeRepository.findAll() );
 		return "formGoviesType";
 	}
 
@@ -151,17 +154,12 @@ public class GoviesIssueController {
 	public String saveGoviesType(@Valid @ModelAttribute("goviesType") GoviesType type,
 					   BindingResult bindingResult,
 					    Model model) throws Exception {
-
-
 		if (bindingResult.hasErrors()) {
 			return "formGoviesType";
 		}
 		model.addAttribute("typeList",goviesTypeRepository.findAll() );
-
 		goviesTypeRepository.save(type);
-
-
-		return "redirect:listIssuance";
+		return "redirect:formGoviesType";
 	}
 
 }

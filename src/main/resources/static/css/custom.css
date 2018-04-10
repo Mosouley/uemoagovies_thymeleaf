@@ -19,7 +19,7 @@
   height: 30px;
   border: 1px solid #ADB2B5;
   line-height: 30px;
-  border-radius: 0px !important; }
+  border-radius: 5px !important; }
 .daterangepicker select.monthselect {
   margin-right: 2%; }
 .daterangepicker td.in-range {
@@ -98,7 +98,8 @@
   width: 70px;
   padding: 0;
   z-index: 9999;
-  position: absolute; }
+  position: absolute;
+   background: #2A3F54; }
 
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
   position: fixed;
@@ -420,7 +421,7 @@ body .container.body .right_col {
 
 body {
   color: #73879C;
-  background: #2A3F54;
+  background: #2A3F75;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -899,7 +900,7 @@ h2 {
   margin-bottom: 10px;
   padding: 10px 17px;
   display: inline-block;
-  background: #fff;
+  background: #ECF0F1;
   border: 1px solid #E6E9ED;
   -webkit-column-break-inside: avoid;
   -moz-column-break-inside: avoid;
@@ -2497,7 +2498,7 @@ ul.social li {
   float: right; }
 
 .social-sidebar {
-  background: #EDEDED;
+  background: #aab6aa;
   width: 22%; }
 
 .social-body {
